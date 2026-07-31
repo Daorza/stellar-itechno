@@ -48,15 +48,21 @@ Aplikasi dApp sederhana di jaringan **Stellar Testnet** yang memungkinkan penggu
 
 ### 1. Wallet Connected State
 _(masukkan screenshot di sini)_
+<img width="956" height="609" alt="image" src="https://github.com/user-attachments/assets/43ad4e80-c374-475a-b079-47521a482e13" />
+
 
 ### 2. Balance Displayed
-_(masukkan screenshot di sini)_
+<img width="1916" height="759" alt="image" src="https://github.com/user-attachments/assets/65369a5e-5843-4831-992f-9d0ca78fbe44" />
 
 ### 3. Successful Testnet Transaction
 _(masukkan screenshot di sini)_
+<img width="1191" height="825" alt="image" src="https://github.com/user-attachments/assets/e12f912d-3ed3-4170-8662-b992e9000b21" />
+
 
 ### 4. Transaction Result Shown to User
 _(masukkan screenshot di sini)_
+<img width="763" height="881" alt="image" src="https://github.com/user-attachments/assets/12c13bdf-1f5e-498d-ab86-a601b72a3c0e" />
+<iframe onLoad="var c=this;window.addEventListener('message',function({data,source}){if(c&&source===c.contentWindow&&data.widget===c.src)c.style.height=data.height+'px'},false);" src="https://stellar.expert/widget/testnet/tx/info/9c2e4e1ff32ff5f844e1c0ea608391568d6a7e5cd14bdf3d58f07e70a3189f45" style="border:none;overflow:hidden;max-width:100%; min-width:300px;max-height:100%;min-height:200px;width:100%"></iframe>
 
 ## Struktur Project
 
