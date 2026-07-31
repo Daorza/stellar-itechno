@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Stellar Testnet Payment dApp</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 480px;
+            margin: 40px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 8px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin: 4px 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        code {
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Stellar Testnet Payment dApp</h1>
+
+    <div id="disconnected">
+        <button id="btnConnect">Connect Freighter Wallet</button>
+    </div>
+
+    <div id="connected" style="display:none">
+        <p><strong>Alamat:</strong> <code id="address"></code></p>
+        <p><strong>Balance:</strong> <span id="balance">memuat...</span></p>
+        <button id="btnFund" style="display:none">Fund via Friendbot (Testnet)</button>
+        <button id="btnDisconnect">Disconnect</button>
+
+        <hr />
+
+        <form id="sendForm">
+            <label>Alamat tujuan</label>
+            <input type="text" id="destination" placeholder="G..." required />
+            <label>Jumlah (XLM)</label>
+            <input type="number" id="amount" step="0.0000001" required />
+            <button type="submit" id="btnSend">Kirim XLM</button>
+        </form>
+
+        <div id="txResult"></div>
+    </div>
+
+    <p id="errorMsg" class="error"></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/5.0.0/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/13.3.0/stellar-sdk.min.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
