@@ -114,13 +114,13 @@ npm run dev
 ### Screenshots — Level 2
 
 **Wallet Options Available**
-_(masukkan screenshot modal pilihan wallet di sini)_
+<img width="1890" height="841" alt="image" src="https://github.com/user-attachments/assets/00be72eb-6d6f-4616-9395-eaa3a3fc6c5b" />
 
 **Deployed Contract (Stellar Expert)**
-_(masukkan screenshot halaman contract di stellar.expert di sini)_
+<img width="1919" height="870" alt="image" src="https://github.com/user-attachments/assets/7b807a1d-b057-4efd-b7f6-c4549fd616b8" />
 
 **Successful Contract Call & Transaction Status**
-_(masukkan screenshot hasil sukses + tx hash dari UI di sini)_
+<img width="1919" height="854" alt="image" src="https://github.com/user-attachments/assets/f79311c7-9da6-49b2-8167-3b23fc43231e" />
 
 ---
 
