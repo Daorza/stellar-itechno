@@ -1,8 +1,14 @@
-# Stellar Testnet Payment dApp
+# Stellar Testnet dApp — White Belt Challenge
 
-Aplikasi dApp sederhana di jaringan **Stellar Testnet** yang memungkinkan pengguna menghubungkan wallet Freighter, melihat saldo XLM mereka, dan mengirim transaksi XLM ke alamat lain — dibuat sebagai submission untuk **Stellar White Belt Level 1 Challenge**.
+Repo ini berisi submission untuk **Stellar White Belt Challenge**, mencakup **Level 1** (payment dApp sederhana) dan **Level 2** (multi-wallet app dengan smart contract).
 
-## Fitur
+---
+
+## Level 1 — Simple Payment dApp
+
+Aplikasi dApp sederhana di jaringan **Stellar Testnet** yang memungkinkan pengguna menghubungkan wallet Freighter, melihat saldo XLM mereka, dan mengirim transaksi XLM ke alamat lain.
+
+### Fitur
 
 - 🔌 Connect & disconnect wallet Freighter
 - 💰 Menampilkan saldo XLM dari wallet yang terhubung
@@ -10,72 +16,133 @@ Aplikasi dApp sederhana di jaringan **Stellar Testnet** yang memungkinkan penggu
 - 💸 Mengirim transaksi XLM ke alamat tujuan
 - ✅ Feedback status transaksi (sukses/gagal) beserta hash transaksi dan link ke Stellar Expert
 
-## Tech Stack
+### Tech Stack
 
 - HTML + JavaScript murni (ES modules), tanpa build step/bundler
 - [`@stellar/freighter-api`](https://www.npmjs.com/package/@stellar/freighter-api) — integrasi wallet Freighter (dimuat via cdnjs)
 - [`@stellar/stellar-sdk`](https://www.npmjs.com/package/@stellar/stellar-sdk) — membangun & submit transaksi ke Stellar Horizon (dimuat via cdnjs)
 - Stellar Testnet Horizon: `https://horizon-testnet.stellar.org`
 
-> Folder `contracts/` berisi smart contract Soroban (staking vault) yang dibuat terpisah sebagai eksplorasi awal, belum terhubung ke frontend ini. Frontend di folder `frontend/` murni menggunakan native XLM payment (`Operation.payment`), sesuai fokus requirement Level 1.
+### Setup & Cara Menjalankan Lokal
 
-## Setup & Cara Menjalankan Lokal
-
-### Prasyarat
-
+**Prasyarat:**
 1. Browser desktop (Chrome/Firefox/Brave) yang mendukung extension
 2. Extension [Freighter Wallet](https://www.freighter.app/) sudah terpasang dan dikonfigurasi ke **Testnet**
 3. VS Code dengan extension **Live Server** (atau alternatif serve HTTP lainnya)
 
-### Langkah
-
-1. Clone repo ini:
+**Langkah:**
 ```bash
-   git clone https://github.com/<username>/<repo>.git
-   cd <repo>/frontend
+git clone https://github.com/<username>/<repo>.git
+cd <repo>/frontend
 ```
-2. Buka folder `frontend/` di VS Code.
-3. Klik kanan `index.html` → **Open with Live Server**.
-4. Browser akan terbuka otomatis di `http://127.0.0.1:5500/` (atau port serupa).
-5. Pastikan Freighter extension sudah aktif dan network-nya di-set ke **Testnet**.
-6. Klik **Connect Freighter Wallet**, approve koneksi di popup Freighter.
-7. Kalau saldo menunjukkan "Akun belum ter-fund", klik **Fund via Friendbot** untuk mendapatkan testnet XLM gratis.
-8. Isi alamat tujuan dan jumlah, klik **Kirim XLM**, lalu approve transaksi di popup Freighter.
+1. Buka folder `frontend/` di VS Code.
+2. Klik kanan `index.html` → **Open with Live Server**.
+3. Browser akan terbuka otomatis di `http://127.0.0.1:5500/` (atau port serupa).
+4. Pastikan Freighter extension sudah aktif dan network-nya di-set ke **Testnet**.
+5. Klik **Connect Freighter Wallet**, approve koneksi di popup Freighter.
+6. Kalau saldo menunjukkan "Akun belum ter-fund", klik **Fund via Friendbot**.
+7. Isi alamat tujuan dan jumlah, klik **Kirim XLM**, lalu approve transaksi di popup Freighter.
 
 > Catatan: karena ES modules tidak bisa dijalankan lewat `file://`, wajib diakses melalui server HTTP lokal (Live Server) — bukan dibuka langsung dengan double-click file.
 
-## Screenshots
+### Screenshots — Level 1
 
-### 1. Wallet Connected State
-_(masukkan screenshot di sini)_
+**Wallet Connected State**
 <img width="956" height="609" alt="image" src="https://github.com/user-attachments/assets/43ad4e80-c374-475a-b079-47521a482e13" />
 
-
-### 2. Balance Displayed
+**Balance Displayed**
 <img width="1916" height="759" alt="image" src="https://github.com/user-attachments/assets/65369a5e-5843-4831-992f-9d0ca78fbe44" />
 
-### 3. Successful Testnet Transaction
-_(masukkan screenshot di sini)_
+**Successful Testnet Transaction**
 <img width="1191" height="825" alt="image" src="https://github.com/user-attachments/assets/e12f912d-3ed3-4170-8662-b992e9000b21" />
 
-
-### 4. Transaction Result Shown to User
-_(masukkan screenshot di sini)_
+**Transaction Result Shown to User**
 <img width="763" height="881" alt="image" src="https://github.com/user-attachments/assets/12c13bdf-1f5e-498d-ab86-a601b72a3c0e" />
-<iframe onLoad="var c=this;window.addEventListener('message',function({data,source}){if(c&&source===c.contentWindow&&data.widget===c.src)c.style.height=data.height+'px'},false);" src="https://stellar.expert/widget/testnet/tx/info/9c2e4e1ff32ff5f844e1c0ea608391568d6a7e5cd14bdf3d58f07e70a3189f45" style="border:none;overflow:hidden;max-width:100%; min-width:300px;max-height:100%;min-height:200px;width:100%"></iframe>
+
+---
+
+## Level 2 — Payment Tracker (Multi-Wallet + Smart Contract)
+
+Lanjutan dari Level 1: sekarang menggunakan **smart contract Soroban** yang ter-deploy di testnet, mendukung **banyak pilihan wallet** (bukan cuma Freighter), dan menampilkan status pembayaran secara **real-time**.
+
+### Fitur
+
+- 🔗 Multi-wallet connect (Freighter, xBull, Albedo, dll) via Stellar Wallets Kit
+- 📝 Mencatat pembayaran (`record_payment`) ke smart contract di testnet
+- 📊 Membaca data pembayaran tersimpan (`get_payment`) langsung dari contract
+- 🔄 Live status yang auto-update tiap 5 detik (polling ke contract)
+- ⚠️ Error handling untuk 3 skenario: wallet belum terhubung, input tidak valid, dan kegagalan transaksi/network
+- ✅ Status transaksi visible (pending → success/fail) beserta tx hash dan link ke Stellar Expert
+
+### Smart Contract
+
+- **Bahasa**: Rust (Soroban SDK)
+- **Contract ID (testnet)**: `CDY45CNG3GCN75L4Z77HOIYWAF57A3FQSL43TA3OQQRX4IBVBEW3EFA3`
+- **Fungsi**: `record_payment(sender, amount, status)`, `get_payment(sender)`
+- Source: `contracts/notes/src/lib.rs`
+
+### Tech Stack
+
+- Vite + vanilla JavaScript
+- [`@creit.tech/stellar-wallets-kit`](https://www.npmjs.com/package/@creit.tech/stellar-wallets-kit) — multi-wallet connect
+- [`@stellar/stellar-sdk`](https://www.npmjs.com/package/@stellar/stellar-sdk) — pemanggilan contract & transaksi
+- [`vite-plugin-node-polyfills`](https://www.npmjs.com/package/vite-plugin-node-polyfills) — polyfill Node.js untuk browser
+- Stellar Soroban RPC Testnet: `https://soroban-testnet.stellar.org`
+
+### Setup & Cara Menjalankan Lokal
+
+```bash
+git clone https://https://github.com/Daorza/stellar-itechno.git
+cd <repo>/frontend-l2
+npm install
+npm run dev
+```
+1. Buka URL yang muncul di terminal (default `http://localhost:5173`).
+2. Klik **Connect Wallet** → pilih wallet dari modal yang muncul (butuh salah satu extension wallet Stellar terpasang, misal Freighter) → approve.
+3. Isi jumlah & status, klik **Record Payment** → approve transaksi di wallet.
+4. Tunggu hasil sukses beserta tx hash muncul.
+5. Klik **Lihat Payment Tersimpan**, atau lihat langsung di bagian **Live status** yang auto-update.
+
+> Catatan: contract sudah ter-deploy sebelumnya ke testnet menggunakan Rust + Stellar CLI di [GitHub Codespaces](https://github.com/features/codespaces) (untuk menghindari isu Windows Smart App Control saat compile lokal).
+
+### Deployed Contract & Transaction Proof
+
+- **Contract Address**: `CDY45CNG3GCN75L4Z77HOIYWAF57A3FQSL43TA3OQQRX4IBVBEW3EFA3`
+- **Transaction hash (contract call dari frontend)**: `e4481fbf823bcb65e8ef34c6a836a14f9968974656648fa043e4487f110f9f0c`
+  - Verifikasi: `https://stellar.expert/explorer/testnet/tx/e4481fbf823bcb65e8ef34c6a836a14f9968974656648fa043e4487f110f9f0c`
+
+### Screenshots — Level 2
+
+**Wallet Options Available**
+_(masukkan screenshot modal pilihan wallet di sini)_
+
+**Deployed Contract (Stellar Expert)**
+_(masukkan screenshot halaman contract di stellar.expert di sini)_
+
+**Successful Contract Call & Transaction Status**
+_(masukkan screenshot hasil sukses + tx hash dari UI di sini)_
+
+---
 
 ## Struktur Project
 
 ```
 .
-├── contracts/          # Smart contract Soroban (belum terhubung ke frontend)
-├── frontend/            # dApp — yang dinilai untuk Level 1
+├── contracts/
+│   └── notes/            # Smart contract Soroban (dipakai di Level 2)
+├── frontend/              # dApp Level 1 — payment XLM sederhana
 │   ├── index.html
 │   └── app.js
+├── frontend-l2/           # dApp Level 2 — multi-wallet + contract call
+│   ├── index.html
+│   ├── vite.config.js
+│   └── src/
+│       └── main.js
 └── README.md
 ```
 
 ## Catatan Pengembangan
 
-- Library dimuat lewat cdnjs sebagai UMD script (bukan bundler/npm) karena environment pengembangan yang digunakan (Soroban Studio, lalu VS Code tanpa Node.js lokal) tidak mendukung `npm install`.
+- Level 1 memakai library lewat cdnjs (UMD script) tanpa bundler, karena environment awal (Soroban Studio) tidak mendukung `npm install`.
+- Level 2 memakai Vite + npm karena kebutuhan multi-wallet library yang lebih kompleks; smart contract di-build & deploy lewat GitHub Codespaces untuk menghindari isu Windows Smart App Control saat compile Rust secara lokal.
 - Semua transaksi berjalan di **Stellar Testnet**, tidak menyentuh mainnet.
